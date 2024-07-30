@@ -1,0 +1,53 @@
+package com.binary_search;
+
+public class BinarySearchAlgo {
+
+    // Recursive binary search method
+    static int binarySearchRecursive(int[] arr, int target, int low, int high) {
+        if (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] == target) {
+                return mid; // Target found
+            } else if (arr[mid] < target) {
+                return binarySearchRecursive(arr, target, mid + 1, high); // Search right half
+            } else {
+                return binarySearchRecursive(arr, target, low, mid - 1); // Search left half
+            }
+        }
+        return -1; // Target not found
+    }
+
+    // Iterative binary search method
+    static int binarySearchIterative(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] == target) {
+                return mid; // Target found
+            } else if (arr[mid] < target) {
+                low = mid + 1; // Search right half
+            } else {
+                high = mid - 1; // Search left half
+            }
+        }
+        return -1; // Target not found
+    }
+
+    public static void main(String[] args) {
+        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+        int target = 11;
+        int indexRecursive = binarySearchRecursive(sortedArray, target, 0, sortedArray.length - 1);
+        if (indexRecursive != -1) {
+            System.out.println("Recursive Binary Search: Element found at index " + indexRecursive);
+        } else {
+            System.out.println("Recursive Binary Search: Element not found");
+        }
+        int indexIterative = binarySearchIterative(sortedArray, target);
+        if (indexIterative != -1) {
+            System.out.println("Iterative Binary Search: Element found at index " + indexIterative);
+        } else {
+            System.out.println("Iterative Binary Search: Element not found");
+        }
+    }
+}
